@@ -11,8 +11,10 @@
 function elementor_melli( $widgets_manager ) {
 
 	require_once( __DIR__ . '/widgets/melli-banner.php' );
+	require_once( __DIR__ . '/widgets/melli-tikfly-process.php' );
 
 	$widgets_manager->register( new \Banner_Section() );
+	$widgets_manager->register( new \Melli_Tikfly_Process() );
 
 }
 add_action( 'elementor/widgets/register', 'elementor_melli' );
