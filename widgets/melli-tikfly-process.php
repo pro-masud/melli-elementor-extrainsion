@@ -122,6 +122,59 @@ class Melli_Tikfly_Process extends \Elementor\Widget_Base {
 		);
 
 
+		//card repeater 
+		$melli_repeater = new \Elementor\Repeater();
+
+		//bannar Image
+		$melli_repeater->add_control(
+			'card_image',
+			[
+				'label' => esc_html__( 'Choose Card Image', 'elementor_melli' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
+			]
+		);
+
+		$melli_repeater->add_control(
+			'melli_card_title',
+			[
+				'label' => esc_html__( 'Card Title', 'elementor_melli' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Title' , 'elementor_melli' ),
+				'label_block' => true,
+			]
+		);
+
+		$melli_repeater->add_control(
+			'melli_card_desc',
+			[
+				'label' => esc_html__( 'Card Description', 'elementor_melli' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'default' => esc_html__( 'Description' , 'elementor_melli' ),
+				'label_block' => true,
+			]
+		);
+
+
+		$this->add_control(
+			'card_list',
+			[
+				'label' => esc_html__( 'Repeater List', 'elementor_melli' ),
+				'type' => \Elementor\Controls_Manager::REPEATER,
+				'fields' => $melli_repeater->get_controls(),
+				'default' => [
+					[
+						'melli_card_title' => esc_html__( 'Title #1', 'elementor_melli' ),
+					],
+				],
+				'title_field' => '{{{ melli_card_title }}}',
+				'separator'		=> 'before',
+			]
+		);
+
+
 		//Tab Control End Here Now
 		$this->end_controls_section();
 
@@ -214,8 +267,80 @@ class Melli_Tikfly_Process extends \Elementor\Widget_Base {
 			]
 		);
 
-	
 
+		//title Background image heading
+		$this->add_control(
+			'img_card_bg',[
+			'label' => esc_html( 'Card Background Image Color', 'picchi_extrantion'),
+			'type'	=>  \Elementor\Controls_Manager::HEADING,
+			'separator'	=> 'before'
+		]);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'card_background',
+				'types' => [ 'classic', 'gradient', 'video' ],
+				'selector' => '{{WRAPPER}} .item span.icon-box::after',
+			]
+		);
+
+		//title Background image heading
+		$this->add_control(
+			'card_title',[
+			'label' => esc_html( 'Card Title', 'picchi_extrantion'),
+			'type'	=>  \Elementor\Controls_Manager::HEADING,
+			'separator'	=> 'before'
+		]);
+
+		//title card title color
+		$this -> add_control('card_titles',[
+			'label'		=> esc_html('Title Color', 'picchi_extrantion'),
+			'type'			=> \Elementor\Controls_Manager::COLOR,
+			'selectors'	=>[
+				'{{WRAPPER}} h3' => 'color: {{VALUE}}'
+			],
+		]);
+
+		//title card typography
+		$this -> add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'		=> 'card_title_type',
+				'selector'	=> '{{WRAPPER}} h3',
+			]
+		);
+
+
+		//card description
+		$this->add_control(
+			'card_desc',[
+			'label' => esc_html( 'Card Description', 'picchi_extrantion'),
+			'type'	=>  \Elementor\Controls_Manager::HEADING,
+			'separator'	=> 'before'
+		]);
+
+		//card color
+		$this -> add_control('card_desce',[
+			'label'		=> esc_html('Description Color', 'picchi_extrantion'),
+			'type'			=> \Elementor\Controls_Manager::COLOR,
+			'selectors'	=>[
+				'{{WRAPPER}} p' => 'color: {{VALUE}}'
+			],
+		]);
+
+		//card typography
+		$this -> add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name'		=> 'card_desc_type',
+				'selector'	=> '{{WRAPPER}} p',
+			]
+		);
+
+
+
+		
 
 
 		//Style Control End Here Now
@@ -251,37 +376,19 @@ class Melli_Tikfly_Process extends \Elementor\Widget_Base {
             <div class="promo-thumbnail wow fadeInUp" data-wow-duration="1s" data-wow-delay=".6s">
                <img class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s" src="<?php echo $promot_image; ?>" alt="">
             </div>
+			<?php if($settings['card_list']){ ?>
             <div class="promo-wrapper">
+				<?php foreach( $settings['card_list'] as $item ){ ?>
                <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
                   <span class="icon-box">
-                  <img src="src/images/promo/01.png" alt="">
+                  <img src="<?php echo $item['card_image']['url']; ?>" alt="">
                   </span>
-                  <h3>Select your<br/> package</h3>
-                  <p>Browse our products and find the best
-                     suited package for you. All our followers, likes and views services have the highest quality possible. Feel free to contact us for a custom order.
-                  </p>
+                  <h3><?php echo $item['melli_card_title']; ?></h3>
+                  <p><?php echo $item['melli_card_desc']; ?></p>
                </div>
-               <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
-                  <span class="icon-box">
-                  <img src="src/images/promo/02.png" alt="">
-                  </span>
-                  <h3>Provide your
-                     information
-                  </h3>
-                  <p>All we need to deliver you the best TikTok services is your TikTok username. That’s right-nothing else. We will NEVER ask for sensitive information such as
-                     your password.
-                  </p>
-               </div>
-               <div class="item wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.2s">
-                  <span class="icon-box">
-                  <img src="src/images/promo/03.png" alt="">
-                  </span>
-                  <h3>Sit back and watch
-                     your gains
-                  </h3>
-                  <p>All orders are instantly processed and your order will usually be delivered within minutes! Remember to keep your TikTok profile public.</p>
-               </div>
+			   <?php } ?>
             </div>
+			<?php } ?>
          </div>
       </section>
 
