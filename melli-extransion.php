@@ -12,9 +12,15 @@ function elementor_melli( $widgets_manager ) {
 
 	require_once( __DIR__ . '/widgets/melli-banner.php' );
 	require_once( __DIR__ . '/widgets/melli-tikfly-process.php' );
+	require_once( __DIR__ . '/widgets/melli-choose-grow.php' );
+	require_once( __DIR__ . '/widgets/melli-pros-buy-tiktok.php' );
+	require_once( __DIR__ . '/widgets/melli-get-in-grow.php' );
 
 	$widgets_manager->register( new \Banner_Section() );
 	$widgets_manager->register( new \Melli_Tikfly_Process() );
+	$widgets_manager->register( new \Melli_Choose_grow() );
+	$widgets_manager->register( new \Melli_Pros_Buy_Tiktok() );
+	$widgets_manager->register( new \Melli_Get_In_Grow() );
 
 }
 add_action( 'elementor/widgets/register', 'elementor_melli' );
