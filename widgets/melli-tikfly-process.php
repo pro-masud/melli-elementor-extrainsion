@@ -42,7 +42,7 @@ class Melli_Tikfly_Process extends \Elementor\Widget_Base {
 	 *
 	 */
 	public function get_icon() {
-		return 'eicon-animation-text';
+		return 'eicon-search-results';
 	}
 
 	/**

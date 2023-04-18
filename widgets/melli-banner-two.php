@@ -1,7 +1,7 @@
 <?php
 
 
-class Banner_Section extends \Elementor\Widget_Base {
+class Banner_Section_two extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -14,7 +14,7 @@ class Banner_Section extends \Elementor\Widget_Base {
 	 *
 	 */
 	public function get_name() {
-		return 'melli_banner';
+		return 'banner_two';
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Banner_Section extends \Elementor\Widget_Base {
 	 *
 	 */
 	public function get_title() {
-		return __( 'Banner One', 'elementor_melli' );
+		return __( 'Bannar Two', 'elementor_melli' );
 	}
 
 	/**
@@ -75,18 +75,6 @@ class Banner_Section extends \Elementor\Widget_Base {
 			'tab'	=>  \Elementor\Controls_Manager::TAB_CONTENT,
 		]);
 
-		//bannar Image
-		$this->add_control(
-			'bannager_image',
-			[
-				'label' => esc_html__( 'Choose Background Image', 'elementor_melli' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-				'default' => [
-					'url' => \Elementor\Utils::get_placeholder_image_src(),
-				],
-			]
-		);
-
 		//bannar Title
 		$this->add_control(
 			'banner_title',
@@ -104,68 +92,6 @@ class Banner_Section extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Description', 'elementor_melli' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'default'	=> esc_html('Write a Text', 'elementor_melli'),
-			]
-		);
-
-		//button repetar here now
-		$btn_icons = new \Elementor\Repeater();
-
-		$btn_icons->add_control(
-			'btn_icon',
-			[
-				'label' => esc_html__( 'Button Icons', 'elementor_melli' ),
-				'type' => \Elementor\Controls_Manager::ICONS,
-				'default' => [
-					'value' => 'fas fa-circle',
-					'library' => 'fa-solid',
-				],
-				'recommended' => [
-					'fa-solid' => [
-						'circle',
-						'dot-circle',
-						'square-full',
-					],
-				],
-				'label_block' => true,
-			]
-		);
-
-		$btn_icons->add_control(
-			'btn_text',
-			[
-				'label' => esc_html__( 'Button', 'elementor_melli' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'default' => esc_html__( 'Read More', 'elementor_melli' ),
-				
-			]
-		);
-
-		$btn_icons->add_control(
-			'btn_link',
-			[
-				'label' => esc_html__( 'Button Link', 'elementor_melli' ),
-				'type' => \Elementor\Controls_Manager::URL,
-				'default' => [
-					'url' => '',
-				],
-				
-			]
-		);
-
-		$this->add_control(
-			'btn_list',
-			[
-				'label' => esc_html__( 'Button Repeater', 'elementor_melli' ),
-				'type' => \Elementor\Controls_Manager::REPEATER,
-				'fields' => $btn_icons->get_controls(),
-				'default' => [
-					[
-						'btn_text' => esc_html__( 'Button', 'elementor_melli' ),
-					],
-				],
-				'title_field' => '{{{ btn_text }}}',
-				'separator'		=> 'after',
-				'label_block' => true,
 			]
 		);
 
@@ -244,59 +170,16 @@ class Banner_Section extends \Elementor\Widget_Base {
 			]
 		);
 
-		//banner icon Style
-		$this->add_control(
-			'banner_icon',[
-			'label' => esc_html( 'Icon Style', 'picchi_extrantion'),
-			'type'	=>  \Elementor\Controls_Manager::HEADING,
-			'separator'	=> 'before'
-		]);
-
-		//banner Description color
-		$this -> add_control('bannar_color_color',[
-			'label'		=> esc_html('Icon Color', 'picchi_extrantion'),
-			'type'			=> \Elementor\Controls_Manager::COLOR,
-			'selectors'	=>[
-				'{{WRAPPER}} i' => 'color: {{VALUE}}'
-			],
-		]);
-
-		//banner Description typography
-		$this -> add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
 			[
-				'name'		=> 'banner_icon_style',
-				'selector'	=> '{{WRAPPER}} i',
+				'name' => 'heading_bg',
+				'types' => [ 'classic', 'gradient', 'video' ],
+				'selector' => '{{WRAPPER}} .banner-bg',
 			]
 		);
 
-		//button Text color
-		$this->add_control(
-			'button_color',[
-			'label' => esc_html( 'Button Text Color', 'picchi_extrantion'),
-			'type'	=>  \Elementor\Controls_Manager::HEADING,
-			'separator'	=> 'before'
-		]);
-
-		//banner Description color
-		$this -> add_control('button_color_text',[
-			'label'		=> esc_html('Text Color', 'picchi_extrantion'),
-			'type'			=> \Elementor\Controls_Manager::COLOR,
-			'selectors'	=>[
-				'{{WRAPPER}} span' => 'color: {{VALUE}}'
-			],
-		]);
-
-		//banner Description typography
-		$this -> add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name'		=> 'banner_btn_style',
-				'selector'	=> '{{WRAPPER}} span',
-			]
-		);
-
-
+		
 
 		//Style Control End Here Now
 		$this->end_controls_section();
@@ -317,39 +200,25 @@ class Banner_Section extends \Elementor\Widget_Base {
 
 		$settings   = $this->get_settings_for_display(); 
 
-		$bannger_bg_img = $settings['bannager_image']['url'];
+
 		$banner_title = $settings['banner_title'];
 		$banner_desc = $settings['banner_desc'];
 		$right_image = $settings['right_image']['url'];
 
 		?>
-		<!-- Banner section -->
-		<div class="banner-section">
-         <img class="banner-bg" src="<?php echo $bannger_bg_img; ?>" alt="">
+		 <!-- Banner section -->
+		 <div class="banner-section shop-page-banner">
+         <div class="banner-bg"></div>
          <div class="container">
             <div class="banner-content">
                <h1><?php echo $banner_title; ?></h1>
                <p><?php echo $banner_desc; ?></p>
-			   <?php if($settings['btn_list']){  ?>
-               <ul class="button-group">
-				<?php foreach($settings['btn_list'] as $item ){ ?>
-                  <li>
-                     <a href="<?php echo esc_url($item['btn_link']['url']); ?>">
-					 	<?php \Elementor\Icons_Manager::render_icon( $item['btn_icon'], [ 'aria-hidden' => 'true' ] ); ?>
-                        <span><?php echo $item['btn_text']; ?></span>                     
-                     </a>
-                  </li>
-                  <?php } ?>
-               </ul>
-			   <?php } ?>
             </div>
             <div class="thumbnail">
                <img src="<?php echo $right_image; ?>" alt="">
             </div>
          </div>
       </div>
-      <!-- end banner section -->
-
 		<?php
 		
 

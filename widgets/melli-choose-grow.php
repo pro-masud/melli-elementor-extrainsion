@@ -28,7 +28,7 @@ class Melli_Choose_grow extends \Elementor\Widget_Base {
 	 *
 	 */
 	public function get_title() {
-		return __( 'Choose Grow', 'elementor_melli' );
+		return __( 'Choose Want To Grow', 'elementor_melli' );
 	}
 
 	/**

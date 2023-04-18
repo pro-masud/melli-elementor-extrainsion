@@ -1,7 +1,7 @@
 <?php
 
 
-class Melli_Get_In_Grow extends \Elementor\Widget_Base {
+class Melli_Get_In_Touch extends \Elementor\Widget_Base {
 
 	/**
 	 * Get widget name.
@@ -28,7 +28,7 @@ class Melli_Get_In_Grow extends \Elementor\Widget_Base {
 	 *
 	 */
 	public function get_title() {
-		return __( 'Get In Grow', 'elementor_melli' );
+		return __( 'Get In Touch', 'elementor_melli' );
 	}
 
 	/**
@@ -68,57 +68,6 @@ class Melli_Get_In_Grow extends \Elementor\Widget_Base {
 	 * @access protected
 	 */
 	protected function _register_controls() {
-
-
-		$this->start_controls_section(
-			'top_shape',[
-			'label' => esc_html( 'Top SVG Shape', 'elementor_melli'),
-			'tab'	=>  \Elementor\Controls_Manager::TAB_CONTENT,
-		]);
-
-		$this->add_control(
-			'top_shape_svg',
-			[
-				'label' => esc_html__( 'Background SVG Shape', 'elementor_melli' ),
-				'type' => \Elementor\Controls_Manager::ICONS,
-				'default' => [
-					'value' => 'fas fa-circle',
-					'library' => 'fa-solid',
-				],
-				'label_block' => true,
-			]
-		);
-
-		$this->end_controls_section();
-
-
-		$this->start_controls_section(
-			'button_shape',[
-			'label' => esc_html( 'Bottom SVG Shape', 'elementor_melli'),
-			'tab'	=>  \Elementor\Controls_Manager::TAB_CONTENT,
-		]);
-
-		$this->add_control(
-			'bottom_shape',
-			[
-				'label' => esc_html__( 'Background SVG Shape', 'elementor_melli' ),
-				'type' => \Elementor\Controls_Manager::ICONS,
-				'default' => [
-					'value' => 'fas fa-circle',
-					'library' => 'fa-solid',
-				],
-				'recommended' => [
-					'fa-solid' => [
-						'circle',
-						'dot-circle',
-						'square-full',
-					],
-				],
-				'label_block' => true,
-			]
-		);
-
-		$this->end_controls_section();
 
 		$this->start_controls_section(
 			'section_title',[
@@ -412,6 +361,12 @@ class Melli_Get_In_Grow extends \Elementor\Widget_Base {
 		$left_title  = $settings['left_title'];
 		$left_desc  = $settings['left_desc'];
 		$left_social_icon  = $settings['left_social_icon'];
+
+
+		$right_title  = $settings['right_title'];
+		$right_desc  = $settings['right_desc'];
+
+
 		?>
 		<!-- get in touch -->
 		<div class="get-in-touch">
@@ -437,8 +392,8 @@ class Melli_Get_In_Grow extends \Elementor\Widget_Base {
             </div>
             <!-- end form-content -->
             <div class="form-area">
-               <h3 class="right_head">Get In Touch</h3>
-               <p class="right_para">Feel free to contact us.</p>
+               <h3 class="right_head"><?php echo $right_title; ?></h3>
+               <p class="right_para"><?php echo $right_desc; ?></p>
                <form action="" method="post">
                   <p class="title">Get In Touch</p>
                   <div class="form-wrapper">
@@ -452,10 +407,6 @@ class Melli_Get_In_Grow extends \Elementor\Widget_Base {
             </div>
          </div>
          <!-- end container -->
-
-         <svg class="shape-middle" width="999" height="1679" viewBox="0 0 999 1679" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M267.135 576.4L999.211 0.0957031C1533.95 461.139 1285.68 877.08 1094.7 1027.42L267.135 1678.89C-216.672 1197.81 65.5487 743.444 267.135 576.4Z" fill="#FFB0B5" fill-opacity="0.25"/>
-         </svg>
       </div>
       <!-- end get-in-touch -->
 

@@ -28,7 +28,7 @@ class Melli_Pros_Buy_Tiktok extends \Elementor\Widget_Base {
 	 *
 	 */
 	public function get_title() {
-		return __( 'Get In Grow', 'elementor_melli' );
+		return __( 'Step For Viwe', 'elementor_melli' );
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Melli_Pros_Buy_Tiktok extends \Elementor\Widget_Base {
 	 *
 	 */
 	public function get_icon() {
-		return 'eicon-form-horizontal';
+		return 'eicon-collapse';
 	}
 
 	/**
